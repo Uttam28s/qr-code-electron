@@ -38,10 +38,7 @@ const RightBar = (props) => {
   const deleteCard = (id) => {
     let card = JSON.parse(window.localStorage.getItem("category"));
     let filter = card.filter((d) => d.id !== id);
-    console.log(
-      "🚀 ~ file: RightBar.js ~ line 33 ~ deleteCard ~ filter",
-      filter
-    );
+
     window.localStorage.setItem("category", JSON.stringify(filter));
     setCategories(filter);
     setOpenDelete("");
@@ -59,29 +56,42 @@ const RightBar = (props) => {
 
   useEffect(() => {
     let cateArray = JSON.parse(localStorage.getItem("category")) || [];
-    let uncate = [...props.data];
-    cateArray.map((val, i) => {
-      let startRange = val.startRange;
-      let endRange = val.endRange;
-      cateArray[i].list = props.data.length
-        ? props.data.filter(
-            (data) =>
-              lastOneNumber(data) >= startRange &&
-              lastOneNumber(data) <= endRange
-          )
-        : [];
-      cateArray[i].list.map((d) => {
-        uncate = uncate.filter((a) => a !== d);
-      });
-    });
+    let uncate = JSON.parse(localStorage.getItem("uncate")) || [];
 
-    console.log(
-      "🚀 ~ file: RightBar.js ~ line 104 ~ useEffect ~ cateArray",
-      uncate
-    );
+
+    // let uncate = [...props.data];
+    // cateArray.map((val, i) => {
+    //   let startRange = val.startRange;
+    //   let endRange = val.endRange;
+    //   cateArray[i].list = props.data.length
+    //     ? props.data.filter(
+    //         (data) =>
+    //           lastOneNumber(data) >= startRange &&
+    //           lastOneNumber(data) <= endRange
+    //       )
+    //     : [];
+    //   cateArray[i].list.map((d) => {
+    //     uncate = uncate.filter((a) => a !== d);
+    //   });
+    // });
     setUncateData(uncate);
     setCategories(cateArray);
+    // localStorage.setItem('category',JSON.stringify(cateArray))
   }, [togleBar, props?.data?.length]);
+
+
+  const resetCard = (id) =>{
+  let cateArray = JSON.parse(localStorage.getItem("category"))
+  cateArray.map((data,i)=>{
+    if(data.id==id){
+      cateArray[i].list=[]
+    }
+  })
+
+  localStorage.setItem("category",JSON.stringify(cateArray))
+  setCategories(cateArray);
+
+  }
 
   const setunCate = (allData, startRange, endRange) => {
     console.log(
@@ -316,6 +326,7 @@ const RightBar = (props) => {
                             setunCate={setunCate}
                             openDelete={openDelete}
                             setOpenDelete={setOpenDelete}
+                            resetCard={resetCard}
                           >
                             {openDelete == data.id && (
                               <div

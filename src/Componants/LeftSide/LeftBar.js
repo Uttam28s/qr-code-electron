@@ -30,13 +30,13 @@ const LeftBar = (props) => {
       total2 = 0;
       console.log("🚀 ~ file: LeftBar.js ~ line 41 ~ props.data.map ~ props", props)
 
-    props.data.map((d) => {
+    // props.data.map((d) => {
 
-      total1 = total1 + (Number(d.split(",").slice(-2)[0])||0);
-      total2 = total2 +( Number(d.split(",").slice(-2)[1])||0);
-    });
-    setsumOfCode({ total1, total2 });
-    console.log("🚀 ~ file: LeftBar.js ~ line 42 ~ useEffect ~ total1", total1,total2)
+    //   total1 = total1 + (Number(d.split(",").slice(-2)[0])||0);
+    //   total2 = total2 +( Number(d.split(",").slice(-2)[1])||0);
+    // });
+    // setsumOfCode({ total1, total2 });
+    // console.log("🚀 ~ file: LeftBar.js ~ line 42 ~ useEffect ~ total1", total1,total2)
   }, [props.data.length]);
 
 
@@ -52,17 +52,22 @@ const LeftBar = (props) => {
     setCurrentCode("");
     focusInput();
       
-     let ary = props.data; 
-     currentCode &&  ary.push(currentCode)
-     currentCode && props.setdata(ary)
+    //  let ary = props.data; 
+    //  currentCode &&  ary.push(currentCode)
+     currentCode && props.setdata(currentCode)
   }
 
   const handleClearData = () => {
-    setCurrentCode("");
+  setCurrentCode("");
   setsumOfCode("");
   setPreviousCode("");
+  let Cate = JSON.parse(localStorage.getItem("category"));
+  Cate.map((d,i)=>{
+    Cate[i].list=[]
+  })
+  localStorage.setItem('category',JSON.stringify(Cate))
+  localStorage.setItem('uncate',JSON.stringify([]))
   props.setdata([]);
- 
   focusInput()
   }
 
@@ -134,20 +139,7 @@ const LeftBar = (props) => {
             </CardContent>
           </Card>
         </div>
-        <div className="code-box">
-          <Card>
-            <CardContent className="p-1">
-              <p className="title font-medium fnt-white">
-                Sum Of Scanned Code :
-              </p>
-              <p className="font-medium bk-white input-box">
-                {" "}
-                {sumOfCode?.total1?.toFixed(4) || "0"}---------
-                {sumOfCode?.total2?.toFixed(4) || "0"}
-              </p>
-            </CardContent>
-          </Card>
-        </div>{" "}<div className="d-flex"></div>
+  {" "}<div className="d-flex"></div>
       <Button variant="contained" 
         onClick={()=>{focusAndSum()}} 
         onKeyDown={handleKeyDown}>SCAN</Button>  

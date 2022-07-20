@@ -14,6 +14,7 @@ import { Tooltip } from "react-tippy";
 import "react-tippy/dist/tippy.css";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
+import RestartAltIcon from '@mui/icons-material/RestartAlt';
 
 const   CategoriesCard = ({
   list,
@@ -25,7 +26,7 @@ const   CategoriesCard = ({
   setunCate,
   setOpenDelete,
   openDelete,
-  children,
+  children,resetCard
 }) => {
   const [edit, setEdit] = useState(false);
   const [startCode, setstartCode] = useState(startRange);
@@ -72,7 +73,7 @@ const   CategoriesCard = ({
         <Card
           className="p-2 m-2 bk-grey coderange-title"
           style={{
-            width: `${togleBar == "center" && !edit ? "68%" : "100%"}`,
+            width: `${togleBar == "center" && !edit ? "55%" : "100%"}`,
           }}
         >
           {!edit ? (
@@ -151,6 +152,16 @@ const   CategoriesCard = ({
             }}
           >
             <DeleteForeverIcon style={{ fill: "white" }}  className="w-100"/>
+          </Card>
+        )}
+            {togleBar == "center" && !edit && (
+          <Card
+            className={`flex p-2 m-2 hover-icon  bk-grey coderange-title ${openDelete==id && "bk-dull"}`}
+            onClick={() => {
+              resetCard(id);
+            }}
+          >
+            <RestartAltIcon style={{ fill: "white" }}  className="w-100"/>
           </Card>
         )}
       </div>

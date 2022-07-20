@@ -32,7 +32,7 @@ export const randomcolor = () => {
   } 
 
   export const  lastOneNumber = (data)=>{
-  console.log("🚀 ~ file: functions.js ~ line 35 ~ lastOneNumber ~ data", data)
+  // console.log("🚀 ~ file: functions.js ~ line 35 ~ lastOneNumber ~ data", data)
     
-    return  data.split(",").slice(-1).map(Number)[0]
+    return  (data).toString().split(",").slice(-1).map(Number)[0]
 } 
