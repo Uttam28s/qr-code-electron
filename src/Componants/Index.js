@@ -1,8 +1,8 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState } from 'react'
 import LeftBar from './LeftSide/LeftBar'
 import RightBar from './RighrSide/RightBar'
-import {sampleCode} from "../Componants/sampleData"
-import ErrorCaseLayout from './TogleSwitch/DragCompo'
+// import {sampleCode} from "../Componants/sampleData"
+// import ErrorCaseLayout from './TogleSwitch/DragCompo'
 import { lastOneNumber } from './functions'
 
 const Index = () => {
@@ -22,7 +22,7 @@ const Index = () => {
    cateArray.map((val, i) => {
      let startRange = val.startRange;
      let endRange = val.endRange;
-     let list = [...cateArray[i].list]
+     let list = cateArray[i].list ? [...cateArray[i].list]:[]
       if( lastOneNumber(d) >= startRange &&
           lastOneNumber(d) <= endRange
          ){
@@ -36,7 +36,15 @@ const Index = () => {
    }
    localStorage.setItem('category',JSON.stringify(cateArray))
    localStorage.setItem('uncate',JSON.stringify(uncate))
+      localStorage.setItem("allcode", JSON.stringify(data));
+
+
  }
+
+
+const  clear = () =>{
+  setData('')
+}
 //  useEffect(() => {
 //    console.log("🚀 ~ file: Index.js ~ line 9 ~ Index ~ data", data)
 //   setTogle(!togle)
@@ -46,15 +54,16 @@ const Index = () => {
 
 
   return (
-    <div className="main-screen-wrapper">{
-      console.log("🚀 ~ file: Index.js ~ line 10 ~ Index ~ togle", togle,data)
-
-    }
-    <LeftBar data={data} setdata={setdata} />
-    <RightBar data={data} setdata={setdata}/>
-    </div>
-
-  )
+      <div className="main-screen-wrapper">
+          {console.log(
+              "🚀 ~ file: Index.js ~ line 10 ~ Index ~ togle",
+              togle,
+              data
+          )}
+          <LeftBar data={data} setdata={setdata} clear={clear} />
+          <RightBar data={data} setdata={setdata} clear={clear} />
+      </div>
+  );
 }
 
 export default Index

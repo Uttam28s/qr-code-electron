@@ -46,12 +46,14 @@ const RightBar = (props) => {
   };
 
   useEffect(() => {
+
+
     setCategories(JSON.parse(window.localStorage.getItem("category")) || []);
-    setCodes(JSON.parse(window.localStorage.getItem("allcode")));
+    setCodes((window.localStorage.getItem("allcode"))||[]);
   }, []);
 
   useEffect(() => {
-    setCodes(JSON.parse(localStorage.getItem("allcode")));
+    setCodes((window.localStorage.getItem("allcode"))||[]);
   }, [togleBar, props?.data?.length]);
 
   useEffect(() => {
@@ -355,7 +357,6 @@ const RightBar = (props) => {
                                   <span
                                     onClick={() => {
                                       setOpenDelete("dummy");
-
                                       setError("");
                                     }}
                                   >

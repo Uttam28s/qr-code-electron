@@ -228,31 +228,36 @@
 
 
 .animation-class{
-    animation: highlight 2000ms ease-out;
+    animation: highlight1 500ms ease-out;
+    animation-fill-mode: forwards;
+
 
 
 }
 
-@keyframes highlight {
+@keyframes highlight1 {
     0% {
          box-shadow: none;
       //   filter: drop-shadow(0px 0px 0px black);
     }
     100% {
-        box-shadow: 0 0 40px #ff0000;
+       box-shadow:  0px 0px 5px 10px #e00000;
       //  filter: drop-shadow(0px 1px 3px black);
     }
   }
 
   .anti-animation-class{
-    animation: highlightanti 1000ms ease-out;
+    animation: highlightanti 500ms ease-in;
+        animation-fill-mode: forwards;
+
 
 
 }
 
 @keyframes highlightanti {
     0% {
-        box-shadow: 0 0 40px #ff0000;
+        box-shadow:  0px 0px 5px 10px #e00000
+
       //  filter: drop-shadow(0px 1px 3px black);
     }
     100% {

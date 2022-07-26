@@ -17,7 +17,6 @@ function createWindow() {
     // height: 720,
     webPreferences: { nodeIntegration: true },
   });
-   mainWindow.webContents.openDevTools();
   mainWindow.setMenuBarVisibility(false);
   mainWindow.maximize();
   mainWindow.loadURL(

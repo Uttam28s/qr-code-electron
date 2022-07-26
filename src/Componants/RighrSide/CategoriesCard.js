@@ -41,7 +41,7 @@ const   CategoriesCard = ({
   }, [startRange, endRange]);
 
   useEffect(() => {
-      console.log('list', list)
+      console.log('list0000000000000000000', list)
       const updatedList = setunCate(list,startRange,endRange)
       console.log("🚀 ~ file: CategoriesCard.js ~ line 44 ~ useEffect ~ updatedList", updatedList)
     setRenderList(updatedList);
@@ -55,7 +55,7 @@ const   CategoriesCard = ({
 
   useEffect(()=>{
     if(animation){
-      setTimeout(()=>{setAnimation("anti-animation-class")},2000)
+      setTimeout(()=>{setAnimation("anti-animation-class")},300 )
     }
     // 
   },[animation])
@@ -67,134 +67,171 @@ const   CategoriesCard = ({
 
 
   return (
-    <div className={`${animation}`}>
-      <div className="flex">
-
-        <Card
-          className="p-2 m-2 bk-grey coderange-title"
-          style={{
-            width: `${togleBar == "center" && !edit ? "55%" : "100%"}`,
-          }}
-        >
-          {!edit ? (
-            <>
-              <div className="font-medium">
-                {startRange.toString() == "NaN" ? startRange : startRange.toString()}
-                <span className="bk-green"></span>-
-                <span className="bka-red">
-                  {endRange.toString() == "NaN" ? endRange : endRange.toString()}
-                </span>
-              </div>
-            </>
-          ) : (
-            <div className="edit-row">
-              <p>
-                <Input
-                  id="font-input"
-                  value={startCode}
-                  onChange={(e) => {
-                    setstartCode(e.target.value?.trim());
-                  }}
-                />
-                <Input
-                  id="font-input"
-                  value={endCode}
-                  onChange={(e) => {
-                    setendCode(e.target.value?.trim());
-                  }}
-                />
-                <div className="flex-row true-false-button"><div className="">
-                <Card
-                  className="flex p-1 bk-green hover-icon  coderange-title  w-100"
-                  variant="contained"
-                  color="success"
-                  onClick={() => {
-                    addCategories(id,startCode, endCode);
-                  }}
-                >
-                  <CheckCircleOutlineOutlinedIcon />
-                </Card></div><div>
-                <Card
-                  className="flex p-1 bk-red hover-icon  coderange-title w-100"
-                  onClick={() => {
-                    setEdit(false);
-                    setstartCode(startRange);
-                    setendCode(endRange);
-                  }}
-                >
-                  <CancelOutlinedIcon />
-                </Card></div>
-                </div>
-              </p>
-            </div>
-          )}
-        </Card>
-        {togleBar == "center" && !edit && (
-          <Card
-            className={`flex p-2 m-2 hover-icon bk-grey coderange-title ${openDelete==id && "bk-dull"}`}
-            // style={
-            //   openDelete == id
-            //     ? { background: "tranparent" }
-            //     : { background: "#4d4d4d" }
-            // }
-            onClick={() => {
-              openDelete !== id && setEdit(true);
-            }}
-          >
-            <ModeEditTwoToneIcon style={{ fill: "white" }} className="w-100" />
-          </Card>
-        )}
-        {togleBar == "center" && !edit && (
-          <Card
-            className={`flex p-2 m-2 hover-icon  bk-grey coderange-title ${openDelete==id && "bk-dull"}`}
-            onClick={() => {
-              setOpenDelete(id);
-            }}
-          >
-            <DeleteForeverIcon style={{ fill: "white" }}  className="w-100"/>
-          </Card>
-        )}
-            {togleBar == "center" && !edit && (
-          <Card
-            className={`flex p-2 m-2 hover-icon  bk-grey coderange-title ${openDelete==id && "bk-dull"}`}
-            onClick={() => {
-              resetCard(id);
-            }}
-          >
-            <RestartAltIcon style={{ fill: "white" }}  className="w-100"/>
-          </Card>
-        )}
-      </div>
-      <div className="sep"></div>
-      <div className={`d-flex ${togleBar=="center" ? "scroll-card":"main-card-scroll"}`}>
-        {renderList.filteredList && renderList.filteredList.length && renderList.filteredList.length ? (
-          renderList.filteredList.map((d) => {
-            return (
-              <p
-                className={`m-2 w-100 invert font-row  ${
-                  togleBar !== "center" && "w-29 anti-invert"
-                }`}
-              >
-                {d}
-              </p>
-            );
-          })
-        ) : (
-          <p className="m-2 align-center w-100">"NO Code In That Range"</p>
-        )}
-      </div>
-      <div className="sep"></div>
-      <div className="p-1">
-       <div className="total-wrap"> <div className="span-wrap">Total:</div>{" "}
-        <div className="total-span-wrapper">
-          <div className="span-wrap">{renderList.total1?.toFixed(4)}</div>
+      <div className={`${animation}`}>
+          <div className="flex">
+              <Card
+                  className="p-2 m-2 bk-grey coderange-title"
+                  style={{
+                      width: `${
+                          togleBar == "center" && !edit ? "55%" : "100%"
+                      }`,
+                  }}>
+                  {!edit ? (
+                      <>
+                          <div className="font-medium">
+                              {startRange.toString() == "NaN"
+                                  ? startRange
+                                  : startRange.toString()}
+                              <span className="bk-green"></span>-
+                              <span className="bka-red">
+                                  {endRange.toString() == "NaN"
+                                      ? endRange
+                                      : endRange.toString()}
+                              </span>
+                          </div>
+                      </>
+                  ) : (
+                      <div className="edit-row">
+                          <p>
+                              <Input
+                                  id="font-input"
+                                  value={startCode}
+                                  onChange={(e) => {
+                                      setstartCode(e.target.value?.trim());
+                                  }}
+                              />
+                              <Input
+                                  id="font-input"
+                                  value={endCode}
+                                  onChange={(e) => {
+                                      setendCode(e.target.value?.trim());
+                                  }}
+                              />
+                              <div className="flex-row true-false-button">
+                                  <div className="">
+                                      <Card
+                                          className="flex p-1 bk-green hover-icon  coderange-title  w-100"
+                                          variant="contained"
+                                          color="success"
+                                          onClick={() => {
+                                              addCategories(
+                                                  id,
+                                                  startCode,
+                                                  endCode
+                                              );
+                                          }}>
+                                          <CheckCircleOutlineOutlinedIcon />
+                                      </Card>
+                                  </div>
+                                  <div>
+                                      <Card
+                                          className="flex p-1 bk-red hover-icon  coderange-title w-100"
+                                          onClick={() => {
+                                              setEdit(false);
+                                              setstartCode(startRange);
+                                              setendCode(endRange);
+                                          }}>
+                                          <CancelOutlinedIcon />
+                                      </Card>
+                                  </div>
+                              </div>
+                          </p>
+                      </div>
+                  )}
+              </Card>
+              {togleBar == "center" && !edit && (
+                  <Card
+                      className={`flex p-2 m-2 hover-icon bk-grey coderange-title ${
+                          openDelete == id && "bk-dull"
+                      }`}
+                      // style={
+                      //   openDelete == id
+                      //     ? { background: "tranparent" }
+                      //     : { background: "#4d4d4d" }
+                      // }
+                      onClick={() => {
+                          openDelete !== id && setEdit(true);
+                      }}>
+                      <ModeEditTwoToneIcon
+                          style={{ fill: "white" }}
+                          className="w-100"
+                      />
+                  </Card>
+              )}
+              {togleBar == "center" && !edit && (
+                  <Card
+                      className={`flex p-2 m-2 hover-icon  bk-grey coderange-title ${
+                          openDelete == id && "bk-dull"
+                      }`}
+                      onClick={() => {
+                          setOpenDelete(id);
+                      }}>
+                      <DeleteForeverIcon
+                          style={{ fill: "white" }}
+                          className="w-100"
+                      />
+                  </Card>
+              )}
+              {togleBar == "center" && !edit && (
+                  <Card
+                      className={`flex p-2 m-2 hover-icon  bk-grey coderange-title ${
+                          openDelete == id && "bk-dull"
+                      }`}
+                      onClick={() => {
+                          resetCard(id);
+                      }}>
+                      <RestartAltIcon
+                          style={{ fill: "white" }}
+                          className="w-100"
+                      />
+                  </Card>
+              )}
+          </div>
           <div className="sep"></div>
-          <div className="span-wrap">{renderList.total2?.toFixed(4)}</div>
-        </div>
-        </div>
+          <div
+              className={`d-flex ${
+                  togleBar == "center" ? "scroll-card" : "main-card-scroll"
+              }`}>
+              {renderList.filteredList &&
+              renderList.filteredList.length &&
+              renderList.filteredList.length ? (
+                  renderList.filteredList.map((d) => {
+                      return (
+                          <p
+                              className={`m-2 w-100 invert font-row  ${
+                                  togleBar !== "center" && "w-29 anti-invert"
+                              }`}>
+                              {d}
+                          </p>
+                      );
+                  })
+              ) : (
+                  <p className="m-2 align-center w-100">
+                      "NO Code In That Range"
+                  </p>
+              )}
+          </div>
+          <div className="sep"></div>
+          <div className="p-1">
+              <div className="total-wrap">
+                  {" "}
+                  <div className="span-wrap">
+                      Total:{renderList.filteredList?.length}
+                  </div>{" "}
+                  <div className="total-span-wrapper">
+                      <div className="span-wrap">
+                          {renderList.total1?.toFixed(4)}
+                      </div>
+                      <div className="sep"></div>
+
+                      <div className="span-wrap">
+                          {renderList.total2?.toFixed(4)}
+                      </div>
+                  </div>
+              </div>
+          </div>
+          {children}
       </div>
-      {children}
-    </div>
   );
 };
 
